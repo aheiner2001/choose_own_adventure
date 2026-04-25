@@ -3,15 +3,16 @@ from __future__ import annotations
 import hashlib
 import os
 import random
+import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-import google.generativeai as genai
 import streamlit as st
 from dotenv import load_dotenv
+from google import genai
 from supabase import Client, create_client
 
 ROOT_ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
@@ -76,15 +77,65 @@ def campaign_code(name: str) -> str:
 
 def get_or_create_campaign(client: Client, name: str) -> dict[str, Any]:
     code = campaign_code(name)
-    existing = as_rows(client.table("campaigns").select("*").eq("join_code", code).limit(1).execute())
-    if existing:
-        return existing[0]
-    inserted = as_rows(
-        client.table("campaigns")
-        .insert({"name": name, "join_code": code, "created_at": now_iso()})
-        .execute()
-    )
-    return inserted[0]
+    try:
+        existing = as_rows(client.table("campaigns").select("*").eq("join_code", code).limit(1).execute())
+        if existing:
+            return existing[0]
+    except Exception:
+        # Backward compatibility: older schemas may not have join_code.
+        try:
+            existing_legacy = as_rows(client.table("campaigns").select("*").eq("code", code).limit(1).execute())
+            if existing_legacy:
+                return existing_legacy[0]
+        except Exception:
+            pass
+
+    payload: dict[str, Any] = {"name": name, "join_code": code, "created_at": now_iso()}
+
+    # Backward compatibility for legacy schemas with extra NOT NULL columns.
+    for _ in range(12):
+        try:
+            inserted = as_rows(client.table("campaigns").insert(payload).execute())
+            if inserted:
+                return inserted[0]
+            raise RuntimeError("Campaign insert returned no row.")
+        except Exception as exc:
+            message = str(exc)
+            missing_col = _extract_missing_not_null_column(message)
+            if not missing_col:
+                raise
+            payload[missing_col] = _legacy_campaign_default(missing_col, name, code)
+
+    raise RuntimeError("Unable to create campaign after legacy-schema compatibility retries.")
+
+
+def _extract_missing_not_null_column(error_message: str) -> str | None:
+    match = re.search(r'null value in column "([^"]+)"', error_message)
+    if not match:
+        return None
+    return match.group(1)
+
+
+def _legacy_campaign_default(column_name: str, campaign_name: str, code: str) -> Any:
+    col = column_name.lower()
+    explicit_defaults: dict[str, Any] = {
+        "code": code,
+        "join_code": code,
+        "name": campaign_name,
+        "creator_prompt": f"Campaign seed for {campaign_name}",
+        "status": "lobby",
+        "current_turn": 0,
+        "turn_index": 0,
+    }
+    if col in explicit_defaults:
+        return explicit_defaults[col]
+    if col.endswith("_at"):
+        return now_iso()
+    if "count" in col or "turn" in col or "round" in col or "index" in col:
+        return 0
+    if "active" in col or col.startswith("is_") or col.startswith("has_"):
+        return False
+    return f"auto_{col}"
 
 
 def create_character(
@@ -241,9 +292,11 @@ def generate_ai_session_brief(
         "5) If players go off-rails (2 bullet points)\n"
         "Tone: fantasy adventure, practical for 60-90 minutes of play."
     )
-    genai.configure(api_key=gemini_api_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(prompt)
+    client = genai.Client(api_key=gemini_api_key)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+    )
     text = getattr(response, "text", None)
     return text.strip() if text else ""
 
