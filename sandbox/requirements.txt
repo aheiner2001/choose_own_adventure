@@ -1,0 +1,5 @@
+streamlit
+reportlab
+supabase
+python-dotenv
+google-generativeai

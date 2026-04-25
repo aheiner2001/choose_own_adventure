@@ -1,0 +1,169 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{a4paper} % or letter or a5paper or ... etc
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsaddr}
+\usepackage{hyperref}
+\usepackage{dirtytalk}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+
+
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{stringcolor}{rgb}{0.7,0.23,0.36}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{keycolor}{rgb}{0.007,0.01,1.0}
+\definecolor{itemcolor}{rgb}{0.01,0.0,0.49}
+ 
+\lstdefinestyle{mystyle}{
+    %backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{keycolor},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{stringcolor},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\lstdefinelanguage{Swift}{
+  keywords={associatedtype, class, deinit, enum, extension, func, import, init, inout, internal, let, operator, private, protocol, public, static, struct, subscript, typealias, var, break, case, continue, default, defer, do, else, fallthrough, for, guard, if, in, repeat, return, switch, where, while, as, catch, dynamicType, false, is, nil, rethrows, super, self, Self, throw, throws, true, try, associativity, convenience, dynamic, didSet, final, get, infix, indirect, lazy, left, mutating, none, nonmutating, optional, override, postfix, precedence, prefix, Protocol, required, right, set, Type, unowned, weak, willSet},
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{emph={Int,count,abs,repeating,Array}, emphstyle=\color{itemcolor}}
+
+
+\title{Week 04}
+
+\date{\today}
+
+\lstset{style=mystyle}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+
+
+Name: 
+\\
+
+Collaborators (if any): 
+
+\section{Tasks}
+
+\subsection{Topological Sort}
+
+Apply the DFS-based algorithm to solve the topological sorting problem for the following digraphs:
+\\
+
+(a) 
+
+\usetikzlibrary{positioning}
+\tikzset{
+     every path/.append style = {
+        arrows = ->
+    }, 
+    hidden/.style = {
+    	draw= black,
+        shape = circle,
+        inner sep = 3 pt, 
+            outer sep = 3 pt
+    }
+}
+
+
+\tikz{
+    \node[hidden] (a) {$A$};
+    \node[hidden] (b) [right = of a] {$B$};
+    \node (c)[hidden] [below left = of a] {$C$};
+    \node (d)[hidden] [below left = of b] {$D$};
+    \node (e)[hidden] [below right = of b] {$E$};
+    \node (f)[hidden] [below right = of c] {$F$};
+    \node (g)[hidden] [below right = of d] {$G$};
+    \path (a) edge (c);
+    \path (a) edge (b);
+    \path (b) edge (g);
+    \path (b) edge (e);
+    \path (c) edge (f);
+    \path (d) edge (a);
+    \path (d) edge (b);
+     \path (d) edge (c);
+    \path (d) edge (f);
+    \path (d) edge (g);
+    \path (g) edge (e);
+    \path (g) edge (f);
+}
+
+
+(b) 
+\\
+
+\usetikzlibrary{positioning}
+\tikzset{
+     every path/.append style = {
+        arrows = ->
+    }, 
+    hidden/.style = {
+    	draw= black,
+        shape = circle,
+        inner sep = 3 pt, 
+            outer sep = 3 pt
+    }
+}
+
+\tikz{
+    \node[hidden] (a) {$A$};
+    \node[hidden] (b) [right = of a] {$B$};
+    \node (c)[hidden] [right = of b] {$C$};
+    \node (d)[hidden] [right= of c] {$D$};
+    \node (e)[hidden] [below right = of a] {$E$};
+    \node (f)[hidden] [below right = of b] {$F$};
+    \node (g)[hidden] [below right = of c] {$G$};
+    \path (a) edge (b);
+    \path (b) edge (c);
+    \path (c) edge (d);
+    \path (d) edge (g);
+    \path (e) edge (a);
+    \path (f) edge (e);
+    \path (f) edge (b);
+    \path (f) edge (c);
+    \path (f) edge (g);
+    \path (g) edge [bend left] (e);
+}
+
+\subsection{Topological Sort Proof}
+
+Prove that the topological sorting problem has a solution if and only if it is a DAG. For a graph with n vertices, what is the largest number of distinct solutions the topological sorting problem can have? 
+
+
+
+\section{Exercises/Problems}
+
+\subsection{Rexburg Power} 
+The electrical network in Rexburg contains n power plants and $n^2$ buildings, pairs of which may be connected to each other through bidirectional wires. There are two options for power to each building. First, by having a wire straight to the power plant. Second, by having a wire to a different building which is recursively powered. Note: no building can be powered by multiple plants. Rexburg plans to install a generator in one power plant to act as an emergency backup. This backup generator would provide power to all buildings powered by that power plant were it to fail.  Given a list, W, of all the wires in the network, describe an $O(n^4)$-time algorithm to determine the power plant where Rexburg should install the generator that would provide backup power to the most buildings upon plant failure. 
+\\
+
+\end{document}

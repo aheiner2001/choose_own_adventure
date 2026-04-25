@@ -1,0 +1,228 @@
+{
+    "@context": {
+      "@vocab": "https://schema.org/",
+      "learningStrategy": "https://schema.org/LearningResource",
+      "level": "https://schema.org/educationalLevel",
+      "tools": "https://schema.org/tool",
+      "cycle": "https://schema.org/ItemList",
+      "understandingLevel": "https://schema.org/proficiencyLevel"
+    },
+    "@type": "Course",
+    "@id": "https://example.org/software-dev-learning-strategies",
+    "name": "Proven Teaching Strategies for Becoming a Functional Software Developer",
+    "description": "A structured set of evidence-based learning strategies to help individuals learn, grow, and build clear mental models in preparation for a career as a functional software developer.",
+    "educationalLevel": "Beginner to Advanced",
+    "teaches": "Software Development Fundamentals, Problem Solving, Debugging, System Design",
+    "keywords": [
+      "software development",
+      "learning strategies",
+      "mental models",
+      "deliberate practice",
+      "programming",
+      "computer science education"
+    ],
+    "hasPart": [
+      {
+        "@type": "LearningResource",
+        "@id": "https://example.org/strategy/spaced-repetition",
+        "position": 1,
+        "name": "Spaced Repetition",
+        "description": "Review concepts at growing intervals, not all at once. Use Anki or daily review to lock syntax and patterns into long-term memory.",
+        "learningResourceType": "Memory Technique",
+        "educationalUse": "Retention of syntax, commands, and patterns",
+        "teaches": "Long-term memory consolidation for programming concepts",
+        "tools": ["Anki", "Daily flashcards", "Weekly review sessions"],
+        "about": {
+          "@type": "Thing",
+          "name": "Forgetting Curve",
+          "description": "Spaced repetition directly combats the forgetting curve by scheduling reviews right before the point of forgetting."
+        }
+      },
+      {
+        "@type": "LearningResource",
+        "@id": "https://example.org/strategy/deliberate-practice",
+        "position": 2,
+        "name": "Deliberate Practice",
+        "description": "Work at the edge of your ability — not your comfort zone. Solve slightly difficult problems daily. Immediate feedback is essential to improvement.",
+        "learningResourceType": "Practice Method",
+        "educationalUse": "Skill development through progressive challenge",
+        "teaches": "Problem-solving, algorithmic thinking, coding fluency",
+        "tools": ["LeetCode", "Exercism", "Codewars"],
+        "about": {
+          "@type": "Thing",
+          "name": "Zone of Proximal Development",
+          "description": "Working just beyond current ability level maximizes learning velocity. Comfort zone work yields diminishing returns."
+        }
+      },
+      {
+        "@type": "LearningResource",
+        "@id": "https://example.org/strategy/feynman-technique",
+        "position": 3,
+        "name": "Feynman Technique",
+        "description": "Teach any concept simply in order to understand it deeply. Explain concepts as if to a beginner. Gaps in your explanation reveal gaps in your understanding.",
+        "learningResourceType": "Comprehension Technique",
+        "educationalUse": "Deep conceptual understanding and identification of knowledge gaps",
+        "teaches": "Conceptual clarity, communication of technical ideas, self-assessment",
+        "tools": ["Writing", "Blogging", "Explaining aloud", "Rubber duck debugging"],
+        "about": {
+          "@type": "Person",
+          "name": "Richard Feynman",
+          "description": "Nobel Prize-winning physicist known for his ability to explain complex concepts in simple terms."
+        }
+      },
+      {
+        "@type": "LearningResource",
+        "@id": "https://example.org/strategy/mental-model-building",
+        "position": 4,
+        "name": "Build Mental Models First",
+        "description": "Before writing code, draw or narrate the system. Understand the 'why' before the 'how.' Diagrams and pseudocode beat rote memorization.",
+        "learningResourceType": "Conceptual Framework Technique",
+        "educationalUse": "System understanding and architectural thinking",
+        "teaches": "System design thinking, conceptual mapping, architectural reasoning",
+        "tools": ["Whiteboard", "Pseudocode", "Concept maps", "Diagrams"],
+        "about": {
+          "@type": "Thing",
+          "name": "Mental Model",
+          "description": "An internal representation of how a system works. Senior developers carry rich mental models — not memorized syntax."
+        }
+      },
+      {
+        "@type": "LearningResource",
+        "@id": "https://example.org/strategy/project-based-learning",
+        "position": 5,
+        "name": "Project-Based Learning",
+        "description": "Build real things from day one. Projects force you to connect concepts and expose exactly what you do not yet understand. Tutorials stay on the happy path — real projects don't.",
+        "learningResourceType": "Applied Learning Method",
+        "educationalUse": "Integration of concepts through real-world application",
+        "teaches": "Full-stack thinking, problem decomposition, self-directed learning",
+        "tools": ["GitHub", "Personal projects", "App clones", "Solving your own problems"],
+        "about": {
+          "@type": "Thing",
+          "name": "Authentic Confusion",
+          "description": "Real projects create authentic confusion that reveals the 10 things you didn't know you needed to know."
+        }
+      },
+      {
+        "@type": "LearningResource",
+        "@id": "https://example.org/strategy/debugging-mindset",
+        "position": 6,
+        "name": "Develop a Debugging Mindset",
+        "description": "Treat errors as information, not failures. Form a hypothesis, test it, and read the stack trace. Debugging is approximately 40% of the job.",
+        "learningResourceType": "Problem-Solving Mindset",
+        "educationalUse": "Error diagnosis, resilience, and systematic problem-solving",
+        "teaches": "Systematic debugging, reading stack traces, hypothesis-driven thinking",
+        "tools": ["Browser DevTools", "Debugger", "Logging", "Scientific method: observe → hypothesize → test"],
+        "about": {
+          "@type": "Thing",
+          "name": "Scientific Method in Debugging",
+          "description": "Treating bugs as scientific problems — observe, form a hypothesis, test — is the foundation of expert debugging."
+        }
+      },
+      {
+        "@type": "LearningResource",
+        "@id": "https://example.org/strategy/learn-in-public",
+        "position": 7,
+        "name": "Learn in Public",
+        "description": "Share your progress, questions, and projects openly. Builds accountability, feedback loops, and your professional network.",
+        "learningResourceType": "Community Learning Method",
+        "educationalUse": "Accountability, feedback, networking, and portfolio building",
+        "teaches": "Communication, community engagement, portfolio development",
+        "tools": ["GitHub", "Twitter/X", "Personal blog", "Open source contributions"],
+        "about": {
+          "@type": "Thing",
+          "name": "Learning Accountability",
+          "description": "Public learning creates social accountability and attracts feedback that accelerates growth far beyond solo study."
+        }
+      },
+      {
+        "@type": "LearningResource",
+        "@id": "https://example.org/strategy/read-others-code",
+        "position": 8,
+        "name": "Read Other People's Code",
+        "description": "Reading code is as important as writing it. Study open-source repositories, trace how real systems are structured, and absorb professional conventions rapidly.",
+        "learningResourceType": "Code Study Method",
+        "educationalUse": "Learning idioms, patterns, and professional conventions",
+        "teaches": "Code comprehension, professional conventions, architectural patterns",
+        "tools": ["GitHub", "Standard library source code", "Open source pull requests", "Code review participation"],
+        "about": {
+          "@type": "Thing",
+          "name": "Implicit Knowledge",
+          "description": "Real codebases contain conventions and idioms that no tutorial explicitly teaches. Reading them is how professionals actually absorb craft."
+        }
+      }
+    ],
+    "learningCycle": {
+      "@type": "ItemList",
+      "name": "The Productive Learning Cycle",
+      "description": "A repeating four-stage cycle that drives compounding learning over time.",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Learn the concept",
+          "description": "Read or watch foundational material to build initial understanding.",
+          "nextItem": "https://example.org/cycle/apply"
+        },
+        {
+          "@type": "ListItem",
+          "@id": "https://example.org/cycle/apply",
+          "position": 2,
+          "name": "Apply it",
+          "description": "Code and build with the concept. Encounter real friction and confusion.",
+          "nextItem": "https://example.org/cycle/explain"
+        },
+        {
+          "@type": "ListItem",
+          "@id": "https://example.org/cycle/explain",
+          "position": 3,
+          "name": "Explain it",
+          "description": "Teach or write about what you learned. Gaps in explanation reveal gaps in understanding.",
+          "nextItem": "https://example.org/cycle/review"
+        },
+        {
+          "@type": "ListItem",
+          "@id": "https://example.org/cycle/review",
+          "position": 4,
+          "name": "Review it",
+          "description": "Revisit the concept at increasing intervals using spaced repetition. Then repeat the cycle.",
+          "nextItem": "https://example.org/cycle/learn"
+        }
+      ]
+    },
+    "understandingLevels": {
+      "@type": "ItemList",
+      "name": "Levels of Understanding",
+      "description": "A progression from surface-level copying to true mastery. Aim to move from top to bottom over time.",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Copy",
+          "description": "Code is copied and it works, but there is no real understanding of why.",
+          "educationalLevel": "Novice"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Understand",
+          "description": "Can modify and adapt existing examples. Understands what each part does.",
+          "educationalLevel": "Beginner"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Internalize",
+          "description": "Can explain concepts from scratch without reference material. Mental models are solid.",
+          "educationalLevel": "Intermediate"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Mastery",
+          "description": "Can design systems, debug confidently, and teach concepts to others. Transfers knowledge to novel problems.",
+          "educationalLevel": "Advanced"
+        }
+      ]
+    }
+  }
+  

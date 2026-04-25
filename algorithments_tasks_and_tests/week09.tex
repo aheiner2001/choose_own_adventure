@@ -1,0 +1,132 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{a4paper} % or letter or a5paper or ... etc
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsaddr}
+\usepackage{hyperref}
+\usepackage{dirtytalk}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem}
+
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{stringcolor}{rgb}{0.7,0.23,0.36}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{keycolor}{rgb}{0.007,0.01,1.0}
+\definecolor{itemcolor}{rgb}{0.01,0.0,0.49}
+ 
+\lstdefinestyle{mystyle}{
+    %backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{keycolor},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{stringcolor},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\lstdefinelanguage{Swift}{
+  keywords={associatedtype, class, deinit, enum, extension, func, import, init, inout, internal, let, operator, private, protocol, public, static, struct, subscript, typealias, var, break, case, continue, default, defer, do, else, fallthrough, for, guard, if, in, repeat, return, switch, where, while, as, catch, dynamicType, false, is, nil, rethrows, super, self, Self, throw, throws, true, try, associativity, convenience, dynamic, didSet, final, get, infix, indirect, lazy, left, mutating, none, nonmutating, optional, override, postfix, precedence, prefix, Protocol, required, right, set, Type, unowned, weak, willSet},
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{emph={Int,count,abs,repeating,Array}, emphstyle=\color{itemcolor}}
+
+
+\title{Week 09}
+
+\date{\today}
+
+\lstset{style=mystyle}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+
+
+Name: 
+\\
+
+Collaborators (if any): 
+
+\section{Tasks}
+
+\subsection{True or False}
+Choose T or F for each of the following statements and briefly explain why.  
+\begin{enumerate}
+\item T/F Searching in a skip list takes $\Theta (\log n)$ time with high probability, but
+could take $\Omega (2n)$ time with nonzero probability.  (Note: this statement could actually be answered as either true or false with proper justification) 
+\item To implement a dictionary, you should always use a hash table over an AVL tree if your main priority is speed.
+\item The number of collisions in a hash table is solely dependent on the table capacity and the hash function.
+\end{enumerate}
+
+\section{Exercises/Problems}
+
+\subsection{Calculate Hash Values for Given Keys} 
+Given the following input (4322, 1334, 1471, 9679, 1989, 6171, 6173, 4199) and the hash function x mod 10, which of the following statements are true? 
+\begin{enumerate}[i.]
+\item 9679, 1989, 4199 hash to the same value
+\item 1471, 6171 hash to the same value
+\item All elements hash to the same value
+\item Each element hashes to a different value 
+\end{enumerate}
+\begin{enumerate}[(A)]
+\item i only
+\item ii only 
+\item i and ii only
+\item iii or iv 
+\end{enumerate}
+
+\subsection{Given a hash table with keys, verify/find possible sequence of keys}
+For a given hash table, we can verify which sequence of keys can lead to that hash table. However, to find possible sequences leading to a given hash table, we need to consider all possibilities. A hash table of length 10 uses open addressing with hash function h(k)=k mod 10, and linear probing. After inserting 6 values into an empty hash table, the table is as shown below. 
+
+\begin{tabular}{| l | r |}
+\hline
+  0 &   \\
+  1 &   \\
+  2 & 42  \\
+  3 & 23 \\
+  4 & 34 \\
+  5 & 52  \\
+  6 & 46  \\
+  7 & 33 \\
+  8 &  \\
+  9 &  \\
+
+\hline
+\end{tabular}
+\\
+
+Which one of the following choices gives a possible order in which the key values could have been inserted in the table? 
+\begin{enumerate}[(A)]
+\item 46, 42, 34, 52, 23, 33
+\item 34, 42, 23, 52, 33, 46 
+\item 46, 34, 42, 23, 52, 33
+\item 42, 46, 33, 23, 34, 52
+\end{enumerate}
+
+
+\end{document}

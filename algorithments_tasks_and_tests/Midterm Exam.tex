@@ -1,0 +1,150 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{a4paper} % or letter or a5paper or ... etc
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsaddr}
+\usepackage{hyperref}
+\usepackage{dirtytalk}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+
+
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{stringcolor}{rgb}{0.7,0.23,0.36}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{keycolor}{rgb}{0.007,0.01,1.0}
+\definecolor{itemcolor}{rgb}{0.01,0.0,0.49}
+ 
+\lstdefinestyle{mystyle}{
+    %backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{keycolor},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{stringcolor},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\lstdefinelanguage{Swift}{
+  keywords={associatedtype, class, deinit, enum, extension, func, import, init, inout, internal, let, operator, private, protocol, public, static, struct, subscript, typealias, var, break, case, continue, default, defer, do, else, fallthrough, for, guard, if, in, repeat, return, switch, where, while, as, catch, dynamicType, false, is, nil, rethrows, super, self, Self, throw, throws, true, try, associativity, convenience, dynamic, didSet, final, get, infix, indirect, lazy, left, mutating, none, nonmutating, optional, override, postfix, precedence, prefix, Protocol, required, right, set, Type, unowned, weak, willSet},
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{emph={Int,count,abs,repeating,Array}, emphstyle=\color{itemcolor}}
+
+
+\title{CSE 381 Midterm Exam}
+
+\date{\today}
+
+\lstset{style=mystyle}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+
+
+Name: 
+\\
+
+\section{True/False - 20 points}
+For each of the following, choose true or false and briefly justify your answer. Each problem is worth 4 points, 2 points for your answer and 2 points for your justification. 
+\begin{enumerate} 
+\item T/F I have watched all lecture videos provided in the course. If true, which topic has been your favorite so far and why? 
+\item T/F Given a binary min-heap storing $n$ items with comparable keys, one can build a
+Set AVL Tree containing the same items using $O(n)$ comparisons. 
+\item T/F In the best case, the height of a Binary Search Tree is $O(log\:n)$ if it is balanced.
+\item T/F Performing an $O(1)$ amortized operation $n$ times on an initially empty
+data structure takes worst-case $O(n)$ time.
+\item T/F Given an array $E$ containing $n$ comparable items, sort $E$ using merge sort. While
+sorting, each item in $E$ is compared with $O(log\: n)$ other items of $E$. 
+\end{enumerate}
+
+\section{Exercises/Problems - 80 points}
+
+\subsection{Sequence Ops - 10 points} 
+Given a data structure $E$ supporting the four first/last sequence operations:
+\begin{tt} E.insert\_first(x), E.delete\_first(), E.insert\_last(x), E.delete\_last(), \end{tt}
+each in $O(1)$ time, describe (write) algorithms to implement the following higher-level operations in terms of the lower-level operations. Recall that delete operations return the deleted item. 
+\\
+
+(a) \begin{tt} swap\_ends(E):\end{tt} Swap the first and last items in the sequence in $E$ in $O(1)$ time. 
+\\
+
+(b) \begin{tt}shift\_left(E, k):\end{tt} Move the first $k$ items in order to the end of the sequence $n$ $E$
+in $O(k)$ time. (After, the $k$th item should be last and the $(k + 1)$st item should be first.)
+\\
+
+\subsection{Video Collage - 20 points}
+The yearbook team at BYU-Idaho is trying something new this year. The students have requested a video collage yearbook rather than photos. The CSE 381 class created a new software, VideoCollage, to help the yearbook team make a collage by overlaying videos on top of one another in a single document. Describe a database to keep track of the videos in a given document which supports the following operations:
+\begin{enumerate}
+\item \begin{tt} make\_document( ):\end{tt} construct an empty document containing no videos
+\item  \begin{tt} import\_video( ):\end{tt} add a video with unique integer ID $x$ to the top of the document
+\item  \begin{tt} display( ):\end{tt} return an array of the documents video IDs in order from bottom to top
+\item  \begin{tt} move\_below(x, y):\end{tt} move the video with ID $x$ directly below the video with ID $y$
+\end{enumerate}
+Operation (1) should run in worst-case $O(1)$ time, operations (2) and (3) should each run in worstcase $O(n)$ time, while operation (4) should run in worst-case $O(log\:n)$ time, where n is the number of videos contained in a document at the time of the operation.
+\\
+
+\begin{bf} Please solve the following problem using dynamic programming.\end{bf} Be sure to define a set of subproblems, relate the subproblems recursively, argue the relation is acyclic, provide base cases, construct a solution from the subproblems, and analyze running time. Use the SRTBOT format as taught in the Dynamic Programming lectures. Indicate whether the requested running time is either: (1) polynomial, (2) pseudopolynomial, or (3) exponential in the size of the input. 
+
+\subsection{T-Shirt Production- 20 points} 
+Susan owns a t-shirt embroidery business and will produce $m$ t-shirts this month. She has a list of $n$
+orders from potential buyers, where the $i$th order states a willingness to buy $a_i$ shirts for a total
+price of $pi$ (not per shirt). Each order must be filled completely or not at all, and can only be filled once. Susan does not have to sell all of her t-shirts, but she must pay $s$ dollars
+per unsold shirt in storage costs. Describe an $O(nm)$-time algorithm to determine which orders
+to fill so that Susan can maximize her profit.  
+\\
+
+\subsection{Biomathematician Stuff - 30 points}
+Emelyne worked as a Biomathematician for BioFire, a biotech company in SLC, for some years. (Loved loved this job BTW). The company manufactures pathogen screening devices, among other things, to test human samples for viruses. (Emelyne was a lead analyst on the rapid PCR covid detection kit that was first to be granted EUA clearance- woo hoo!). To create the detection test, melt temperature data for each virus is studied to create a performance window for the software to correctly identify a positive or negative virus result. In the PCR step, the device goes through heating and cooling and the tests will output the temperature at which the organism melted at. 
+\\
+As part of her research, Emelyne often needed to query the maximum temperature the test had observed within a particular date range in history, based on a growing set of measurements which she collects and adds to frequently. Assume that temperatures and dates are integers representing values at some consistent resolution. Help Emelyne evaluate such range queries efficiently by implementing a database supporting the following operations. 
+\begin{enumerate}
+\item \begin{tt} record\_temp(t, d):\end{tt} record a measurement of temperature $t$ on date $d$
+\item  \begin{tt} max\_in\_range(d1,d2):\end{tt} return max temperature observed between dates $d_1$ and $d_2$ inclusive 
+\end{enumerate}
+To solve this problem, we will store temperature measurements in an AVL tree with binary search
+tree semantics keyed by date, where each node $A$ stores a measurement \begin{tt} A.item \end{tt} with a date property \begin{tt} A.item.key \end{tt} and temperature property \begin{tt} A.item.temp \end{tt}. 
+\\
+
+(a) To help evaluate the desired range query, we will augment each node with: \begin{tt} A.max\_temp,\end{tt} the maximum temperature stored in $A'$s subtree; and both \begin{tt} A.min\_date \end{tt}
+and \begin{tt} A.max\_date,\end{tt} the minimum and maximum dates stored in $A'$s subtree respectively. Describe a $O(1)$-time algorithm to compute the value of these augmentations on node $A$, assuming all other nodes in $A'$s subtree have already been correctly augmented. 
+\\
+
+(b) A subtree \begin{bf} partially overlaps \end{bf} an inclusive date range if the subtree contains at least one measurement that is within the range \begin{bf} and \end{bf} at least one measurement that is outside the range. Given an inclusive date range, prove that for any binary search tree containing
+measurements keyed by dates, there is at most one node in the tree whose left and right subtrees both partially overlap the range. 
+\\
+
+(c) Let \begin{tt} subtree\_max\_in\_range(A, d1, d2)\end{tt} be the maximum temperature of any
+measurement stored in node $A'$s subtree with a date between $d_1$ and $d_2$ inclusive (returning None if no measurements exist in the range). Assuming the tree has been augmented as in part (a), describe a recursive algorithm to compute the value of \begin{tt} subtree\_max\_in\_range(A, d1, d2).\end{tt} If $h$ is the height of $A'$s subtree, your algorithm should run in $O(h)$ time when $A$ partially overlaps the range, and in $O(1)$ time otherwise. 
+\\
+
+(d) Describe a database to implement operations \begin{tt} record\_temp(t, d)\end{tt} and \begin{tt} max\_in\_range(d1, d2),\end{tt} each in worst-case $O(log\:n)$ time, where $n$ is the number
+of unique dates of measurements stored in the database at the time of the operation. 
+
+
+\end{document}

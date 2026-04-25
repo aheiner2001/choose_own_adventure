@@ -1,0 +1,98 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{a4paper} % or letter or a5paper or ... etc
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsaddr}
+\usepackage{hyperref}
+\usepackage{dirtytalk}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem}
+
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{stringcolor}{rgb}{0.7,0.23,0.36}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{keycolor}{rgb}{0.007,0.01,1.0}
+\definecolor{itemcolor}{rgb}{0.01,0.0,0.49}
+ 
+\lstdefinestyle{mystyle}{
+    %backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{keycolor},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{stringcolor},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\lstdefinelanguage{Swift}{
+  keywords={associatedtype, class, deinit, enum, extension, func, import, init, inout, internal, let, operator, private, protocol, public, static, struct, subscript, typealias, var, break, case, continue, default, defer, do, else, fallthrough, for, guard, if, in, repeat, return, switch, where, while, as, catch, dynamicType, false, is, nil, rethrows, super, self, Self, throw, throws, true, try, associativity, convenience, dynamic, didSet, final, get, infix, indirect, lazy, left, mutating, none, nonmutating, optional, override, postfix, precedence, prefix, Protocol, required, right, set, Type, unowned, weak, willSet},
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{emph={Int,count,abs,repeating,Array}, emphstyle=\color{itemcolor}}
+
+
+\title{Week 10}
+
+\date{\today}
+
+\lstset{style=mystyle}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+
+
+Name: 
+\\
+
+Collaborators (if any): 
+
+\section{Tasks}
+
+\subsection{True or False}
+Choose T or F for each of the following statements and briefly explain why.  
+\begin{enumerate}
+\item In a connected, weighted graph, every lowest weight edge is always in some minimum spanning tree. 
+\item For a connected, weighted graph with n vertices and exactly n edges, it is possible to find a minimum spanning tree in O(n) time. 
+\end{enumerate}
+
+\section{Exercises/Problems}
+
+\subsection{Longest Palindrome Sequence} 
+In lecture 30, we discussed the longest palindrome sequence problem. Provide a function to compute the sequence. Experiment with various words to test your function. Example, given ''c h a r a c t e r'' , your function should output ''c a r a c''
+
+\subsection{Procrastination}
+You have N CSE 381 assignments due right now, but you haven't started any of them, so they are all going to be late. Each assignment requires $d_i$ days to complete, and has a cost penalty of $c_i$ per day. So if assignment $i$ ends up being finished $t$ days late, then it incurs a penalty of $t * ci$. Assume that once you start working on an assignment, you must work on it until you finish it, and that you cannot work on multiple assignments at the same time. 
+\\
+
+For example, suppose you have three assignments: A1 takes 3 days and has a penalty of 12 points/day, A2 takes 4 days and has a penalty of 20 points/day, and A3 takes 2 days and has
+a penalty of 4 points/day. The best order is then A2, A1, A3 which results in a penalty of 20 * 4 + 12 * (4 + 3) + 4 * (3 + 4 + 2) = 200 points. 
+\\
+
+Give a greedy algorithm that outputs an ordering of the assignments that minimizes the total penalty for all the assignments. Analyze the running time and prove/discuss correctness. 
+\end{document}

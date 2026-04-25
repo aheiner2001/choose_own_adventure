@@ -1,0 +1,190 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{a4paper} % or letter or a5paper or ... etc
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsaddr}
+\usepackage{hyperref}
+\usepackage{dirtytalk}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage[shortlabels]{enumitem}
+
+
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{stringcolor}{rgb}{0.7,0.23,0.36}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{keycolor}{rgb}{0.007,0.01,1.0}
+\definecolor{itemcolor}{rgb}{0.01,0.0,0.49}
+ 
+\lstdefinestyle{mystyle}{
+    %backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{keycolor},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{stringcolor},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\lstdefinelanguage{Swift}{
+  keywords={associatedtype, class, deinit, enum, extension, func, import, init, inout, internal, let, operator, private, protocol, public, static, struct, subscript, typealias, var, break, case, continue, default, defer, do, else, fallthrough, for, guard, if, in, repeat, return, switch, where, while, as, catch, dynamicType, false, is, nil, rethrows, super, self, Self, throw, throws, true, try, associativity, convenience, dynamic, didSet, final, get, infix, indirect, lazy, left, mutating, none, nonmutating, optional, override, postfix, precedence, prefix, Protocol, required, right, set, Type, unowned, weak, willSet},
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{emph={Int,count,abs,repeating,Array}, emphstyle=\color{itemcolor}}
+
+
+\title{CSE 381 Final Exam}
+
+\lstset{style=mystyle}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+
+
+Name: 
+\\
+
+\section{True/False - 20 points}
+\begin{bf}For each of the following, choose true or false and briefly justify your answer. Each problem is worth 4 points, 2 points for your answer and 2 points for your justification. \end{bf}
+\begin{enumerate} 
+\item T/F With all equal-sized intervals, a greedy algorithm based on earliest
+start time will always select the maximum number of compatible intervals. \\
+\item T/F If we divide an array into groups of 3, find the median of each group,
+recursively find the median of those medians, partition, and recurse, then we can
+obtain a linear-time median-finding algorithm. \\
+\item T/F Van Emde Boas sort (where we insert all numbers, find the min, and
+then repeatedly call SUCCESSOR) can be used to sort $n = lg \: u$ numbers in $O(lg \: u * \:
+lg\: lg\: lg\: u)$ time. \\
+\item T/F 3SAT cannot be solved in polynomial time, even if P = NP. \\
+\item T/F Negating all the edge weights in a weighted undirected graph G and
+then finding the minimum spanning tree gives us the maximum-weight spanning
+tree of the original graph G. 
+\end{enumerate}
+
+\section{Exercises/Problems - 80 points}
+
+\subsection{Fast Fourier Transform - 10 points} 
+Jeremy is trying to multiply two polynomials using the FFT. In his trivial example, Jeremy sets
+$a = (0, 1)$ and $b = (0, 1)$, both representing $0 + x$, and calculates:  
+\\
+
+$A = F(a) = B = F(b) = (1, -1),$
+\\
+
+$C = A * B = (1, 1),$
+\\
+
+$c = F^{-1}(C) = (1, 0).$
+\\
+
+So $c$ represents $1 + 0 * x$, which is clearly wrong. Point out Jeremy's mistake in one or two sentences; no
+calculation needed. (Jeremy swears he has calculated FFT F and inverse FFT F -1 correctly.) 
+\\
+
+\subsection{Polynomial Multiplication - 15 points}
+This problem will explore how to check the product of polynomials. Specifically, you are given three polynomials: 
+\begin{align*} 
+p(x) &= a_nx^n + a_{n-1}x^{n-1} + ... + a_0,\\
+q(x) &= b_nx^n + b_{n-1}x^{n-1} + ... + b_0,\\
+r(x) &= c_{2n}x^{2n} + c_{2n-1}x^{2n-1} + ... + c_0
+\end{align*}
+\\
+
+We want to check whether $p(x)* q(x) = r(x)$ (for all values $x$). Via FFT, we could simply compute
+$p(x)* q(x)$ and check in $O(n \log n)$ time. Instead, we aim to achieve $O(n)$ time via randomization. 
+
+\begin{enumerate}[(a)]
+\item (5 points) Describe an $O(n)$-time randomized algorithm for testing whether $p(x) * q(x) = r(x)$ that satisfies the following properties:
+\\
+
+\begin{enumerate}[1.]
+\item If the two sides are equal, the algorithm outputs YES.
+\item If the two sides are unequal, the algorithm outputs NO with probability at least $\frac{1}{2}$
+\\
+\end{enumerate}
+
+\item (2 points) Prove that your algorithm satisfies Property 1.
+\\
+
+\item (3 points) Prove that your algorithm satisfies Property 2. Hint: recall the Fundamental Theorem of Algebra: A degree-s polynomial has (at most) d roots. 
+\\
+
+\item (5 points) Design a randomized algorithm to check whether $p(x)· q(x) = r(x)$ that is correct with probability at least $1 - \: \epsilon$. Analyze your algorithm in terms of $n$ and $\frac{1}{\epsilon}$. 
+\end{enumerate}
+
+\subsection{Choose an Algorithm- 10 points} 
+Sometimes choosing the suitable sorting algorithm is not an easy task. Understanding the differences between the sorting algorithms is a great place to start. For the algorithms listed below list some characteristics of each algorithm including when to use it (what to look for) and the run time. 1 point for correct algorithm description, 1 point for correct run time. \\
+
+Algorithms: Selection Sort, Insertion Sort, Merge Sort, Radix Sort, Topological Sort 
+\\
+
+\subsection{Pairing- 10 points}
+\begin{enumerate}[a.] 
+\item (4 points) Glove Selection. There are 22 gloves in a drawer: 5 pairs of red gloves, 4
+pairs of yellow, and 2 pairs of green. You select the gloves in the dark and
+can check them only after a selection has been made. What is the smallest
+number of gloves you need to select to have at least one matching pair in
+the best case? In the worst case? (hint: this question can be answered different depending on your assumption about the gloves. I.e. Gloves are not socks- they can be right-handed and left-handed.) \\
+
+\item (6 points) Missing socks. Imagine that after washing 5 distinct pairs of socks, you
+discover that 2 socks are missing. Of course, you would like to have
+the largest number of complete pairs remaining. Thus, you are left with
+4 complete pairs in the best-case scenario and with 3 complete pairs in
+the worst case. Assuming that the probability of disappearance for each
+of the 10 socks is the same, find the probability of the best-case scenario;
+the probability of the worst-case scenario; and the number of pairs you should
+expect in the average case. (hint: You have only two qualitatively different outcomes possible. Count the number of ways to get each of the two.)
+\end{enumerate} 
+
+\subsection{Linear Programming - 10 points} 
+In lecture, we talked about linear programming, optimization problems, and simplex method. There's a neat library in Python that is slick for minimization and maximization problems. Research and use the PulP library in Python to minimize: \\
+\begin{align*} 
+Z &= 3x + 5y 
+\end{align*}
+Subject to the constraints:  
+\begin{align*} 
+2x + 3y &\geq 12 \\
+-x + y &\leq 3 \\
+x &\geq 4 \\
+y &\leq 3 \\
+x, y &\geq 0
+\end{align*}
+
+
+\subsection{Short Answer - 15 points} 
+\begin{enumerate}[a.] 
+\item (5 points) How does the run time of finding a minimum cut compare with the run time for finding a maximum flow? \\
+\item (5 points) If you know problem X is NP-complete, and you want to show that problem Y is NP-complete, do you reduce X to Y, or reduce Y to X. Justify your answer. \\
+\item (5 points) Yes, no, or maybe: There is a polynomial time algorithm for determining if an undirected graph has a hamiltonian circuit? Justify your answer. \\
+\end{enumerate}
+
+\subsection{Wrap it Up - 10 points} 
+I hope you have enjoyed this course, and I hope you learned a lot about algorithms! Please write a couple paragraphs detailing what you learned. What was your favorite topic covered? What did you know coming into the course that was expanded on? What are you more confident in? Etc. (please be specific!)
+
+
+\end{document}

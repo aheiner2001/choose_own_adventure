@@ -1,0 +1,144 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{a4paper} % or letter or a5paper or ... etc
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsaddr}
+\usepackage{hyperref}
+\usepackage{dirtytalk}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{enumitem}
+
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{stringcolor}{rgb}{0.7,0.23,0.36}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{keycolor}{rgb}{0.007,0.01,1.0}
+\definecolor{itemcolor}{rgb}{0.01,0.0,0.49}
+ 
+\lstdefinestyle{mystyle}{
+    %backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{keycolor},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{stringcolor},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\lstdefinelanguage{Swift}{
+  keywords={associatedtype, class, deinit, enum, extension, func, import, init, inout, internal, let, operator, private, protocol, public, static, struct, subscript, typealias, var, break, case, continue, default, defer, do, else, fallthrough, for, guard, if, in, repeat, return, switch, where, while, as, catch, dynamicType, false, is, nil, rethrows, super, self, Self, throw, throws, true, try, associativity, convenience, dynamic, didSet, final, get, infix, indirect, lazy, left, mutating, none, nonmutating, optional, override, postfix, precedence, prefix, Protocol, required, right, set, Type, unowned, weak, willSet},
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{emph={Int,count,abs,repeating,Array}, emphstyle=\color{itemcolor}}
+
+
+\title{Week 07}
+
+\date{\today}
+
+\lstset{style=mystyle}
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+
+
+Name: 
+\\
+
+Collaborators (if any): 
+
+\section{Tasks}
+
+\subsection{Asymptotic Growth}
+Sort all the functions below in increasing order of asymptotic (big-$O$) growth. If some have the
+same asymptotic growth, then be sure to indicate that. Note: lg means base 2. 
+\begin{enumerate}
+\item $5n$
+\item $4$ lg $n$
+\item $4$ lg lg $n$
+\item $n^4$
+\item $n^{1/2}$ $lg^4$ $n$
+\item $(lg \: n)^{5\:lg\:n}$
+\item $n^{lg\:n}$
+\item $5^n$
+\item $4^{n^4}$
+\item $4^{4^n}$
+\item $5^{5^n}$
+\item $5^{5n}$
+\item $n^{n^{1/5}}$
+\item $n^{n/4}$
+\item ${n/4}^{n/4}$
+\end{enumerate}
+
+\section{Exercises/Problems}
+
+\subsection{Solve the Recurrences} 
+Give asymptotic upper and lower bounds for $T(n)$ in each of the following recurrences. Assume
+that $T(n)$ is constant for $n \leq 2$. Make your bounds as tight as possible, and justify your answers. 
+If you feel unsure about this, brush up on The Master Method.
+\begin{enumerate}[label=(\alph*)]
+\item $T(n) = 4T(n/4) + 5n$
+\item $ T(n) = 4T(n/5) + 5n$
+\item $T(n) = 5T(n/4) + 4n$
+\item $T(n) = 25T(n/5) + n^2$
+\item $T(n) = 4T(n/5) + lg \: n$
+\item $T(n) = 4T(n/5) + lg^5 \: n \sqrt n$
+\item $T(n) = 4T(\sqrt n) + lg^5 \: n$
+\item $T(n) = 4T(\sqrt n) + lg^2 \: n$
+\item $T(n) = T(\sqrt n) + 5$
+\item $ T(n) = T(n/2) + 2T(n/5) + T(n/10) + 4n$
+\end{enumerate} 
+
+\subsection{Franchise Location} 
+Choco Donuts, a new chocolate milk and donuts restaurant chain, wants to maximize their total profit and build restaurants on many street corners. 
+\\
+
+The road network is an undirected graph $G = (V, E)$, where the potential restaurant
+sites are the vertices of the graph. Each vertex $a$ has a nonnegative integer value $p_a$, which describes the potential profit of site $a$. Two restaurants cannot be built on adjacent vertices (to avoid self-competition). You are tasked with designing an algorithm that outputs the chosen set $U \subseteq V$ of sites that maximizes the total profit $\sum _{a \epsilon U} \: p_a$.
+\\
+
+For parts (a)-(c), suppose that the street network $G$ is acyclic, i.e., a tree.
+\begin{enumerate}[label=(\alph*)]
+\item Consider the following greedy restaurant-placement algorithm: Choose the highest-profit vertex $a_0$ in the tree (breaking ties according to some order on vertex names) and put it into U. Remove $a_0$ from further consideration, along with all of its neighbors in $G$. Repeat until no further vertices remain.
+\\
+
+Give a counterexample to show that this algorithm does not always give a restaurant
+placement with the maximum profit. 
+\\
+
+\item Give an efficient algorithm to determine a placement with maximum profit.
+\\
+
+\item Suppose that, in the absence of good market research, Choco Donuts decides that all sites are
+equally good, so the goal is simply to design a restaurant placement with the largest number of locations. Give a simple greedy algorithm for this case, and prove its correctness. 
+\\
+
+\item Now suppose that the graph is arbitrary and not necessarily acyclic. Give the fastest correct algorithm you can for solving the problem. 
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,68 @@
+{
+  "last_seen_date": "2026-04-24",
+  "week_start": "2026-04-19",
+  "courses": {
+    "Old Testament": {
+      "daily_hours": {
+        "2026-04-24": 3.0
+      },
+      "running": false,
+      "running_start_iso": null,
+      "session_target_override": 3,
+      "daily_target_sessions": {
+        "2026-04-24": 2
+      },
+      "daily_completed_sessions": {
+        "2026-04-24": 1
+      }
+    },
+    "Algorithms": {
+      "daily_hours": {
+        "2026-04-24": 4.250569968333333
+      },
+      "running": false,
+      "running_start_iso": null,
+      "session_target_override": 2,
+      "daily_target_sessions": {
+        "2026-04-24": 2
+      },
+      "daily_completed_sessions": {
+        "2026-04-24": 0
+      }
+    },
+    "Calculus": {
+      "daily_hours": {
+        "2026-04-24": 8.233333333333333
+      },
+      "running": false,
+      "running_start_iso": null,
+      "session_target_override": 9,
+      "daily_target_sessions": {
+        "2026-04-24": 5
+      },
+      "daily_completed_sessions": {
+        "2026-04-24": 5
+      }
+    },
+    "Massively Parallel Computation": {
+      "daily_hours": {
+        "2026-04-24": 4.393546083055556
+      },
+      "running": false,
+      "running_start_iso": null,
+      "session_target_override": 2,
+      "daily_target_sessions": {
+        "2026-04-24": 2
+      },
+      "daily_completed_sessions": {
+        "2026-04-24": 2
+      }
+    }
+  },
+  "show_break_banner": true,
+  "focus_cycle": {
+    "active": false,
+    "phase": "idle",
+    "phase_start_iso": null
+  }
+}
